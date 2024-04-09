@@ -1,0 +1,24 @@
+#Exercice_40.
+import turtle
+class Rectangle:
+     def __init__(self, longueur, largeur):
+             self.longueur = longueur
+             self.largeur = largeur
+     def tracer_figure(self):
+             turtle.color("red")
+             turtle.forward(self.longueur)
+             turtle.right(90)
+             turtle.color("blue")
+             turtle.forward(self.largeur)
+             turtle.right(90)
+             turtle.color("green")
+             turtle.forward(self.longueur)
+             turtle.right(90)
+             turtle.color("orange")
+             turtle.forward(self.largeur)
+             turtle.right(90)
+# Exemple d'utilisation de la classe Rectangle
+rectangle1 = Rectangle(100, 50)
+rectangle1.tracer_figure()
+
+turtle.done()
