@@ -1,0 +1,34 @@
+import turtle  # Importation du module turtle pour le dessin
+
+class Rectangle:
+    def _init_(self, longueur, largeur):
+        self.longueur = longueur  # Initialisation de l'attribut longueur
+        self.largeur = largeur  # Initialisation de l'attribut largeur
+    def draw(self):
+        t = turtle.Turtle()  # Création d'une instance de Turtle
+        t.forward(self.longueur)  # Dessine le premier côté du rectangle
+        t.right(90)  # Tourne de 90 degrés à droite
+        t.forward(self.largeur)  # Dessine le deuxième côté du rectangle
+        t.right(90)  # Tourne de 90 degrés à droite
+        t.forward(self.longueur)  # Dessine le troisième côté du rectangle
+        t.right(90)  # Tourne de 90 degrés à droite
+        t.forward(self.largeur)  # Dessine le dernier côté du rectangle
+class Square(Rectangle):  # La classe Square hérite de la classe Rectangle
+    def _init_(self, cote):
+        super()._init_(cote, cote)  # Appel du constructeur de la classe mère avec cote comme longueur et largeur
+    def draw(self):
+        t = turtle.Turtle()  # Création d'une instance de Turtle
+        t.color("red", "black")  # Définition de la couleur du trait à rouge et du remplissage à noir
+        t.right(30)  # Rotation initiale de 30 degrés
+        t.begin_fill()  # Commence à remplir la forme
+        for _ in range(4):  # Boucle pour dessiner les 4 côtés du carré
+            t.forward(self.longueur)  # Dessine un côté du carré
+            t.right(90)  # Tourne de 90 degrés à droite
+        t.end_fill()  # Termine de remplir la forme
+# Exemple d'utilisation
+rectangle = Rectangle(100, 50)  # Création d'une instance de Rectangle
+rectangle.draw()  # Dessin du rectangle
+carre = Square(100)  # Création d'une instance de Square
+carre.draw()  # Dessin du carré
+
+turtle.done()  # Garde la fenêtre ouverte jusqu'à ce qu'elle soit fermée manuellement
