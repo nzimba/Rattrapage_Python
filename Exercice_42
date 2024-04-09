@@ -1,0 +1,52 @@
+Exercice 42:
+from math import gcd
+
+class Fraction:
+    # Initialisation de la classe avec deux attributs : numérateur et dénominateur
+    def _init_(self, numerator, denominator):
+        self.numerator = numerator
+        self.denominator = denominator
+
+    # Méthode pour inverser la fraction
+    def invert(self):
+        return Fraction(self.denominator, self.numerator)
+
+    # Méthode pour simplifier la fraction
+    def simplify(self):
+        # Utilisation de l'algorithme du PGCD pour simplifier la fraction
+        common_divisor = gcd(self.numerator, self.denominator)
+        return Fraction(self.numerator // common_divisor, self.denominator // common_divisor)
+
+    # Méthode pour multiplier deux fractions
+    def _mul_(self, other):
+        # Le produit de deux fractions est la fraction dont le numérateur est le produit des numérateurs et le dénominateur est le produit des dénominateurs
+        return Fraction(self.numerator * other.numerator, self.denominator * other.denominator).simplify()
+
+    # Méthode pour additionner deux fractions
+    def _add_(self, other):
+        # Pour additionner deux fractions, on met d'abord les fractions au même dénominateur, puis on additionne les numérateurs
+        common_denominator = self.denominator * other.denominator
+        numerator = self.numerator * other.denominator + self.denominator * other.numerator
+        return Fraction(numerator, common_denominator).simplify()
+
+    # Méthode pour soustraire deux fractions
+    def _sub_(self, other):
+        # Pour soustraire deux fractions, on met d'abord les fractions au même dénominateur, puis on soustrait les numérateurs
+        common_denominator = self.denominator * other.denominator
+        numerator = self.numerator * other.denominator - self.denominator * other.numerator
+        return Fraction(numerator, common_denominator).simplify()
+
+    # Méthode pour diviser deux fractions
+    def _div_(self, other):
+        # La division de deux fractions est équivalente à la multiplication de la première fraction par l'inverse de la deuxième
+        return self._mul_(other.invert())
+
+    # Méthode pour afficher la fraction sous la forme "numérateur/dénominateur"
+    def _str_(self):
+        return f"{self.numerator}/{self.denominator}"
+
+    # Méthode pour créer une fraction à partir d'une chaîne de caractères
+    @staticmethod
+    def from_string(string):
+        numerator, denominator = map(int, string.split('/'))
+        return Fraction(numerator, denominator)
